@@ -33,7 +33,7 @@ class NoCaptchaServiceProvider extends ServiceProvider {
     */
     public function boot()
     {
-        $this->loadTranslationsFrom(__DIR__ . '/../../lang', 'nocaptcha');
+        $this->loadTranslationsFrom(__DIR__ . '/../lang', 'nocaptcha');
 
         $this->app->booted(function($app) {
             // Get validator and translator
