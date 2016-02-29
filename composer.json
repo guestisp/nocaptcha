@@ -1,0 +1,19 @@
+{
+    "name": "guestisp/nocaptcha",
+    "description": "Antispam nocaptcha by GUEST.it",
+    "keywords": ["nocaptcha","guestadmin"],
+    "authors": [
+        {
+            "name": "GUEST.it s.r.l.",
+            "email": "webmaster@guest.it"
+        }
+    ],
+    "require": {
+        "php": ">=5.4.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "GuestIsp\\NoCaptcha\\": "src/NoCaptcha"
+        }
+    }
+}
