@@ -39,7 +39,7 @@ Aggiungere il Facade nella sezione 'aliases' del file di configurazione
 Inserire il div nascosto all'interno delle form richiamando `NoCaptcha::generate(..)`
 in maniera analoga alla seguente:
 
-    {!! Form::open('contact') !!}
+    {!! Form::open(['method'=>'POST']) !!}
         ...
         {!! NoCaptcha::generate('nome_campo', 'nome_campo_time') !!}
         ...
