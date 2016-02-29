@@ -33,8 +33,8 @@ class NoCaptcha {
         // Encrypt the current time
         $nocaptcha_time_encrypted = $this->getEncryptedTime();
 
-        $html = '<div id="' . $nocaptcha_name . '_wrap" style="display:none;">' . "\r\n" .
-                    '<input name="' . $nocaptcha_name . '" type="text" value="" id="' . $nocaptcha_name . '"/>' . "\r\n" .
+        $html = '<div id="' . $nocaptcha_name . '_container" style="display:none;">' . "\r\n" .
+                    '<input name="' . $nocaptcha_name . '" type="text" value="" id="' . $nocaptcha_name . '" autocomplete="off"/>' . "\r\n" .
                     '<input name="' . $nocaptcha_time . '" type="text" value="' . $nocaptcha_time_encrypted . '"/>' . "\r\n" .
                 '</div>';
 
