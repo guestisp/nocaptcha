@@ -69,7 +69,7 @@ Alessandro Corbelli
 
 ## License
 
-E' tutto mio, guai a voi.
+proprietary, closed-source
 
 ## Version
 1.5.0
