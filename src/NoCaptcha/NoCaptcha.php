@@ -1,10 +1,13 @@
 <?php namespace GuestIsp\NoCaptcha;
 
+use Cache;
 use Crypt;
+use Request;
 
 class NoCaptcha {
 
-    protected $disabled = false;
+    protected $disabled    = false;
+    protected $nonceLength = 64;
 
     /**
      * Attiva validazione nocaptcha
@@ -30,12 +33,16 @@ class NoCaptcha {
      */
     public function generate($nocaptcha_name, $nocaptcha_time)
     {
-        // Encrypt the current time
+        // Cripto l'orario attuale
         $nocaptcha_time_encrypted = $this->getEncryptedTime();
+
+        // Cripto un nonce e lo salvo in cache
+        $nocaptcha_nonce_encrypted = $this->getEncryptedNonce();
 
         $html = '<div id="' . $nocaptcha_name . '_container" style="display:none;">' . "\r\n" .
                     '<input name="' . $nocaptcha_name . '" type="text" value="" id="' . $nocaptcha_name . '" autocomplete="off"/>' . "\r\n" .
                     '<input name="' . $nocaptcha_time . '" type="text" value="' . $nocaptcha_time_encrypted . '"/>' . "\r\n" .
+                    '<input name="' . $nocaptcha_nonce . '" type="text" value="' . $nocaptcha_nonce_encrypted . '"/>' . "\r\n" .
                 '</div>';
 
         return $html;
@@ -56,6 +63,25 @@ class NoCaptcha {
         }
 
         return $value == '';
+    }
+
+    /**
+     * Validatore del nonce
+     * 
+     * @param  string $attribute
+     * @param  mixed $value
+     * @param  array $parameters
+     * @return boolean
+     */
+    public function validateNonce($attribute, $value, $parameters)
+    {
+        if ($this->disabled) {
+            return true;
+        }
+
+        $value = $this->decryptNonce($value);
+
+        return (!empty($value) && $value == Request::path());
     }
 
     /**
@@ -86,6 +112,35 @@ class NoCaptcha {
     public function getEncryptedTime()
     {
         return Crypt::encrypt(time());
+    }
+
+    /**
+     * Genera un nonce criptato e lo salva in cache
+     * @return string
+     */
+    public function getEncryptedNonce()
+    {
+        // Genero un nonce (è la chiave in cache)
+        $nonce = str_random($this->nonceLength);
+
+        // Salvo in cache il nonce
+        Cache::put($nonce, Request::path(), 120);        
+
+        // Ritorno la chiave criptata del nonce
+        return Crypt::encrypt($nonce);
+    }
+
+    /**
+     * Decripta il nonce e ne ritorna la stringa originale
+     * @return string
+     */
+    public function decryptNonce($cryptedNonce)
+    {
+        // Cripto il nonce (viene passato nella form)
+        $decrypt = Crypt::decrypt($cryptedNonce);
+
+        // Ritorno il valore non criptato del nonce o '' nel caso non ci fosse
+        return Cache::pull($decrypt, '');
     }
 
     /**

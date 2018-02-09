@@ -41,8 +41,9 @@ class NoCaptchaServiceProvider extends ServiceProvider {
             $translator = $app['translator'];
 
             // Aggiunge due regole di validazione custom
-            $validator->extend('nocaptcha', 'nocaptcha@validateNoCaptcha', $translator->get('nocaptcha::validation.nocaptcha'));
-            $validator->extend('nocaptchatime', 'nocaptcha@validateNoCaptchaTime', $translator->get('nocaptcha::validation.nocaptchatime'));
+            $validator->extend('nocaptcha',      'nocaptcha@validateNoCaptcha',     $translator->get('nocaptcha::validation.nocaptcha'));
+            $validator->extend('nocaptchanonce', 'nocaptcha@validateNonce',         $translator->get('nocaptcha::validation.nocaptchanonce'));
+            $validator->extend('nocaptchatime',  'nocaptcha@validateNoCaptchaTime', $translator->get('nocaptcha::validation.nocaptchatime'));
         });
     }
 
