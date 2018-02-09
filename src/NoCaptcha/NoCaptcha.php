@@ -2,6 +2,7 @@
 
 use Cache;
 use Crypt;
+use Log;
 use Request;
 
 class NoCaptcha {
@@ -29,9 +30,10 @@ class NoCaptcha {
      * Genera il nocaptcha e ritorna la form html
      * @param  string $nocaptcha_name
      * @param  string $nocaptcha_time
+     * @param  string $nocaptcha_nonce
      * @return string
      */
-    public function generate($nocaptcha_name, $nocaptcha_time)
+    public function generate($nocaptcha_name, $nocaptcha_time, $nocaptcha_nonce)
     {
         // Cripto l'orario attuale
         $nocaptcha_time_encrypted = $this->getEncryptedTime();
