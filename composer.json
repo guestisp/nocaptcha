@@ -17,5 +17,5 @@
             "GuestIsp\\NoCaptcha\\": "src/NoCaptcha"
         }
     },
-    "license": "Commercial, closed-source"
+    "license": "proprietary"
 }
