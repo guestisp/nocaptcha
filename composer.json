@@ -1,6 +1,7 @@
 {
     "name": "guestisp/nocaptcha",
     "description": "Antispam nocaptcha by GUEST.it",
+    "version": "1.5.0",
     "keywords": ["nocaptcha","guestadmin"],
     "authors": [
         {
@@ -15,5 +16,6 @@
         "psr-4": {
             "GuestIsp\\NoCaptcha\\": "src/NoCaptcha"
         }
-    }
+    },
+    "license": "Commercial, closed-source"
 }
