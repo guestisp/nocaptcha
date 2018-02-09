@@ -83,7 +83,7 @@ class NoCaptcha {
 
         $value = $this->decryptNonce($value);
 
-        return (!empty($value) && $value == Request::path());
+        return (!empty($value) && $value == Request::fullUrl());
     }
 
     /**
@@ -126,7 +126,7 @@ class NoCaptcha {
         $nonce = str_random($this->nonceLength);
 
         // Salvo in cache il nonce
-        Cache::put($nonce, Request::path(), 120);        
+        Cache::put($nonce, Request::fullUrl(), 120);        
 
         // Ritorno la chiave criptata del nonce
         return Crypt::encrypt($nonce);
