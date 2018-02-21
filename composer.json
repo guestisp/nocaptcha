@@ -1,7 +1,7 @@
 {
     "name": "guestisp/nocaptcha",
     "description": "Antispam nocaptcha by GUEST.it",
-    "version": "1.5.2",
+    "version": "1.5.3",
     "keywords": ["nocaptcha","guestadmin"],
     "authors": [
         {

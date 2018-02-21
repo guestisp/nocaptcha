@@ -20,7 +20,7 @@ class NoCaptchaServiceProvider extends ServiceProvider {
     */
     public function register()
     {
-        $this->app['nocaptcha'] = $this->app->share(function($app)
+        $this->app->singleton('nocaptcha', function($app)
         {
             return new NoCaptcha;
         });
