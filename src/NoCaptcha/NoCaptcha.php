@@ -139,8 +139,14 @@ class NoCaptcha {
     public function decryptNonce($cryptedNonce)
     {
         // Cripto il nonce (viene passato nella form)
-        $decrypt = Crypt::decrypt($cryptedNonce);
-
+        try {
+            $decrypt = Crypt::decrypt($cryptedNonce);
+        }
+    	catch (\Exception $exception)
+        {
+            return null;
+        }
+        
         // Ritorno il valore non criptato del nonce o '' nel caso non ci fosse
         return Cache::pull($decrypt, '');
     }
